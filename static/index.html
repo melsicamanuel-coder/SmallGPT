@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmallGPT</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">G</div>
+                <div>
+                    <h1>SmallGPT</h1>
+                    <p class="tagline">Character-level language model playground</p>
+                </div>
+            </div>
+            <div class="status" id="status">
+                <span class="status-dot"></span>
+                <span id="status-text">Connecting...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="model-select">Model</label>
+                    <select id="model-select">
+                        <option value="">No models loaded</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label for="temperature">
+                        Temperature <span class="value" id="temp-value">1.00</span>
+                    </label>
+                    <input type="range" id="temperature" min="0.1" max="2.0" step="0.05" value="1.0">
+                    <div class="range-labels">
+                        <span>Focused</span>
+                        <span>Creative</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="max-tokens">
+                        Max Tokens <span class="value" id="tokens-value">200</span>
+                    </label>
+                    <input type="range" id="max-tokens" min="50" max="2000" step="50" value="200">
+                    <div class="range-labels">
+                        <span>50</span>
+                        <span>2000</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="top-k">
+                        Top-K <span class="value" id="topk-value">Off</span>
+                    </label>
+                    <input type="range" id="top-k" min="0" max="100" step="5" value="0">
+                    <div class="range-labels">
+                        <span>Off</span>
+                        <span>100</span>
+                    </div>
+                </div>
+
+                <div class="model-info" id="model-info"></div>
+            </div>
+
+            <div class="generation">
+                <div class="prompt-area">
+                    <label for="prompt">Prompt <span class="hint">(leave empty for unconditional generation)</span></label>
+                    <textarea id="prompt" placeholder="Enter a seed text... e.g. 'ROMEO:' or 'First Citizen:'"
+                              rows="3"></textarea>
+                </div>
+
+                <button id="generate-btn" class="generate-btn">
+                    <span class="btn-text">Generate</span>
+                    <span class="btn-loading" style="display:none;">
+                        <span class="spinner"></span> Generating...
+                    </span>
+                </button>
+
+                <div class="output-area" id="output-area" style="display:none;">
+                    <div class="output-header">
+                        <span>Output</span>
+                        <button class="copy-btn" id="copy-btn" title="Copy to clipboard">Copy</button>
+                    </div>
+                    <pre class="output-text" id="output-text"></pre>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built from scratch with PyTorch &middot; Decoder-only transformer architecture &middot; Trained on Tiny Shakespeare</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
